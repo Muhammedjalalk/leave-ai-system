@@ -5,16 +5,12 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    class Role(models.TextChoices):
-        EMPLOYEE='EMPLOYEE','Employee',
-        MANAGER='MANAGER', 'Manager',
-        HR='HR','HR'
+    ROLE_CHOICES=[
+        ('admin','Admin'),
+        ('manager','Manager'),
+        ('employee','Employee'),
 
-    role=models.CharField(max_length=10,choices=Role.choices,default=Role.EMPLOYEE)
-    department=models.CharField(max_length=100,blank=True)
-    manager=models.ForeignKey('self',null=True,on_delete=models.SET_NULL,related_name='team')
-
-    def __str__(self):
-        return f"{self.username}({self.role})"
+    ]
+    role=models.CharField(max_length=20,choices=ROLE_CHOICES,default="employee",)
 
 

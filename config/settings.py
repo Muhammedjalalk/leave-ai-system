@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xthjda4k8@4yafb^ggq*ea0o@v-vdos-6a4xumucbv^hv1qxt2'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-dev-only-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_frameworks',
+    'rest_framework',
     'corsheaders',
     'users',
     'leaves',
@@ -52,7 +52,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware'
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -135,7 +135,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-AUTH_USER_MODEL='user.User
+AUTH_USER_MODEL='users.User'
 CORE_ALLOWED_ORIGINS=["http://localhost:5173"]
 REST_FRAME_WORK={
     'DEFAULT_AUTHENTICATION_CLASSES':(
@@ -150,6 +150,6 @@ SIMPLE_JWT={
         'REFRASH_TOKEN_LIFETIME':timedelta(days=7)
         }
 
-GEMINI_API_KEY=os.getenv('GEMIN_API_KEY','') 
+GEMINI_API_KEY=os.getenv('GEMINI_API_KEY','') 
 
 
